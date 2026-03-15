@@ -22,7 +22,7 @@ def score_package(frontmatter, sections):
     expected_outline = expected_outline_count(layout)
     actual_outline = outline_count(sections.get("Card Outline", ""))
 
-    platform_native_fit = 18
+    platform_native_fit = 14
     hook = sections.get("Hook", "")
     angle = sections.get("Angle", "")
     comments_angle = sections.get("Comments Angle", "")
@@ -30,24 +30,35 @@ def score_package(frontmatter, sections):
     audience = frontmatter.get("audience", "")
     tone = frontmatter.get("tone", "")
     source_signals = frontmatter.get("source_signals", [])
+    goal = str(frontmatter.get("goal", "")).strip()
+    post_type = str(frontmatter.get("post_type", "")).strip()
+    platform = str(frontmatter.get("platform", "")).strip()
+    generic_goals = {"growth", "awareness", "traffic", "engagement"}
 
     if 8 <= len(hook) <= 18:
         platform_native_fit += 2
     elif len(hook) > 20:
-        platform_native_fit -= 5
+        platform_native_fit -= 4
         issues.append("Hook is too long for a strong cover.")
     elif len(hook) < 6:
-        platform_native_fit -= 3
+        platform_native_fit -= 4
         issues.append("Hook is too short for a native-looking cover.")
 
-    if len(angle) > 40:
-        platform_native_fit -= 4
+    if len(angle) > 36:
+        platform_native_fit -= 5
         issues.append("Angle is too dense and should be tightened.")
     elif len(angle) > 28:
-        platform_native_fit -= 2
+        platform_native_fit -= 3
         issues.append("Angle can be tightened for a cleaner cover.")
+    else:
+        platform_native_fit += 1
 
-    hook_clarity = 16
+    if audience:
+        platform_native_fit += 1
+    if tone:
+        platform_native_fit += 1
+
+    hook_clarity = 12
     if len(hook) < 6:
         hook_clarity -= 6
         issues.append("Hook is too short to be clear.")
@@ -59,7 +70,7 @@ def score_package(frontmatter, sections):
     if any(token in hook for token in ("不是", "先", "为什么", "别")):
         hook_clarity += 2
 
-    interaction_potential = 15
+    interaction_potential = 10
     if not comments_angle:
         interaction_potential -= 6
         issues.append("Comments Angle is missing.")
@@ -71,36 +82,49 @@ def score_package(frontmatter, sections):
     else:
         interaction_potential += 2
     if "？" in comments_angle or "什么" in comments_angle:
+        interaction_potential += 2
+    if any(token in sections.get("CTA", "") for token in ("收藏", "评论", "转发", "私信", "发给")):
         interaction_potential += 1
 
-    business_relevance = 14
+    business_relevance = 10
     if not isinstance(source_signals, list) or not source_signals:
         business_relevance -= 8
         issues.append("source_signals is missing or empty.")
     else:
         business_relevance += min(len(source_signals), 3)
-    if not frontmatter.get("goal"):
+    if not goal:
         business_relevance -= 4
         issues.append("goal is missing from frontmatter.")
+    elif goal in generic_goals:
+        business_relevance -= 2
+        issues.append("goal is too generic and should be made more specific.")
+    else:
+        business_relevance += 2
     if audience:
         business_relevance += 1
     if tone:
         business_relevance += 1
+    if platform == "xiaohongshu":
+        business_relevance += 1
+    if post_type in ("opinion", "howto", "behind_the_scenes"):
+        business_relevance += 1
 
-    packaging_readiness = 14
+    packaging_readiness = 10
     if actual_outline < expected_outline:
         packaging_readiness -= 12
         issues.append(f"Card Outline only has {actual_outline} items; layout {layout} needs {expected_outline}.")
     elif actual_outline == expected_outline:
         packaging_readiness += 4
     else:
-        packaging_readiness += 1
-        issues.append(f"Card Outline has {actual_outline} items; extra pages will be ignored for layout {layout}.")
+        packaging_readiness -= 4
+        issues.append(f"Card Outline has {actual_outline} items; layout {layout} should land cleanly on {expected_outline}.")
     if frontmatter.get("layout") not in ("six", "nine"):
         packaging_readiness -= 8
         issues.append("layout must be six or nine.")
-    if notes:
+    else:
         packaging_readiness += 1
+    if notes:
+        packaging_readiness += 0
     if len(angle) <= 28:
         packaging_readiness += 1
 
@@ -112,9 +136,9 @@ def score_package(frontmatter, sections):
         "packaging_readiness": max(packaging_readiness, 0),
     }
     total = sum(scores.values())
-    if total >= 80:
+    if total >= 82 and not issues:
         recommendation = "ready"
-    elif total >= 60:
+    elif total >= 62:
         recommendation = "revise"
     else:
         recommendation = "hold"

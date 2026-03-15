@@ -14,6 +14,7 @@ Mark as `ready` only when:
 - cards are readable
 - the CTA is clear
 - the package feels native enough for Xiaohongshu
+- there are no meaningful packaging mismatches left to fix
 
 ## Revise
 
@@ -29,6 +30,8 @@ Typical revise cases:
 - card titles too vague
 - body text too heavy
 - CTA exists but feels weak
+- the package is usable, but the score is inflated by generic goals or broad claims
+- the outline does not land cleanly on the chosen layout
 
 ## Hold
 

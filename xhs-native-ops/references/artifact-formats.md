@@ -67,14 +67,14 @@ should be held.
 
 ```json
 {
-  "total_score": 100,
+  "total_score": 84,
   "publish_recommendation": "ready",
   "dimension_scores": {
-    "platform_native_fit": 20,
-    "hook_clarity": 20,
-    "interaction_potential": 20,
-    "business_relevance": 20,
-    "packaging_readiness": 20
+    "platform_native_fit": 17,
+    "hook_clarity": 18,
+    "interaction_potential": 16,
+    "business_relevance": 17,
+    "packaging_readiness": 16
   },
   "top_issues": [],
   "next_fix": "Package is strong enough to move into review."
