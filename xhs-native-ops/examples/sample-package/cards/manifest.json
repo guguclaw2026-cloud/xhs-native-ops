@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "topic": "小团队先让AI接手什么",
+  "layout": "six",
+  "card_count": 6,
+  "audience": "正在用 AI 重跑分工的小团队操盘者",
+  "tone": "清楚、直接、可执行",
+  "source_package": "xhs-native-ops/examples/sample-package/package.md",
+  "pages": [
+    {
+      "index": 1,
+      "role": "cover",
+      "title": "小团队最该先交给 AI 的，不是创意",
+      "path": "01-cover.svg"
+    },
+    {
+      "index": 2,
+      "role": "content",
+      "title": "别先让 AI 代替判断",
+      "path": "02-card.svg"
+    },
+    {
+      "index": 3,
+      "role": "content",
+      "title": "第一步交给 AI 的活",
+      "path": "03-card.svg"
+    },
+    {
+      "index": 4,
+      "role": "content",
+      "title": "不要一开始就交给 AI 的活",
+      "path": "04-card.svg"
+    },
+    {
+      "index": 5,
+      "role": "content",
+      "title": "为什么很多团队体感差",
+      "path": "05-card.svg"
+    },
+    {
+      "index": 6,
+      "role": "content",
+      "title": "真正轻下来的顺序",
+      "path": "06-card.svg"
+    }
+  ],
+  "warnings": []
+}

@@ -1,0 +1,15 @@
+{
+  "total_score": 95,
+  "publish_recommendation": "ready",
+  "dimension_scores": {
+    "platform_native_fit": 20,
+    "hook_clarity": 20,
+    "interaction_potential": 20,
+    "business_relevance": 18,
+    "packaging_readiness": 17
+  },
+  "top_issues": [
+    "Card Outline has 8 items; extra pages will be ignored for layout six."
+  ],
+  "next_fix": "Card Outline has 8 items; extra pages will be ignored for layout six."
+}

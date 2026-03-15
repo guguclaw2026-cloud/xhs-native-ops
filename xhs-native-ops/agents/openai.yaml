@@ -1,0 +1,5 @@
+interface:
+  display_name: "XHS Native Ops"
+  short_description: "Shared Xiaohongshu package-building and review workflow"
+  brand_color: "#E53935"
+  default_prompt: "Use $xhs-native-ops to turn this topic or package into a Xiaohongshu-native, review-first publish package."
